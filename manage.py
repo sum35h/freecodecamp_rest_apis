@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'timestamp_project.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'freecodecamp_apis_project.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'timestamp_project.urls'
+ROOT_URLCONF = 'freecodecamp_apis_project.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'timestamp_project.wsgi.application'
+WSGI_APPLICATION = 'freecodecamp_apis_project.wsgi.application'
 
 
 # Database
