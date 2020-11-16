@@ -11,32 +11,45 @@ import re
 def time_data(request,ts):
     
     if request.method == 'GET':
+        utc = None
         if ts.__contains__('-'):
-            #if re.match(time,r'^\d{1,2}-\d{1,2}-\d{4}'):
+            try:
                 utc = datetime.strptime(ts,'%Y-%m-%d').replace(tzinfo=timezone.utc)
-                
-                data={
-                    "unix": int(utc.timestamp())*1000,
-                    "utc": utc.strftime("%a, %d %b %Y %H:%S:%M GMT")
-                    }
-           
+            except ValueError:
+                data={"error": "Invalid Date"}
                 return Response(data)
+        else:
+            try:
+                t=int(ts)//1000
+                utc = datetime.utcfromtimestamp(t)
+            except ValueError:
+                data={"error": "Invalid Date"}
+                return Response(data)
+
+        data={
+            "unix": int(utc.timestamp())*1000,
+            "utc": utc.strftime("%a, %d %b %Y %H:%M:%S GMT")
+            }
+            
+        return Response(data)
             
 
-        else:
-            t=int(ts)//1000
-            utc = datetime.fromtimestamp(t)
-            utc= utc.strftime("%a, %d %b %Y %H:%S:%M GMT")
-            unixtime = int(ts)
-            data={
-            "unix": unixtime,
-            "utc": utc
+
+@api_view(['GET'])
+def time_data_now(request):
+    
+    if request.method == 'GET':
+        t= time.time()
+        utc = datetime.utcfromtimestamp(t)
+           
+        
+        data={
+            "unix": int(utc.timestamp())*1000,
+            "utc": utc.strftime("%a, %d %b %Y %H:%M:%S GMT")
             }
-          
-            return Response(data)
-      
 
-
+        return Response(data)
+    
 # class time_data(APIView):
 #     def get(self,request,time, format=None):
 #         data={
