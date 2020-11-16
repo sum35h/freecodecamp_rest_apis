@@ -9,7 +9,6 @@ import time
 import re
 
 @api_view(['GET'])
-@renderer_classes([JSONRenderer])
 def time_data(request,ts):
     
     if request.method == 'GET':
@@ -38,7 +37,6 @@ def time_data(request,ts):
 
 
 @api_view(['GET'])
-@renderer_classes([JSONRenderer])
 def time_data_now(request):
     
     if request.method == 'GET':
