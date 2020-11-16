@@ -11,6 +11,7 @@ import re
 def time_data(request,ts):
     
     if request.method == 'GET':
+        print(request.type)
         utc = None
         if ts.__contains__('-'):
             try:
